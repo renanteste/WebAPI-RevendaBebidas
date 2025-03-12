@@ -1,0 +1,6 @@
+@WebAPI_RevendaBebidas_HostAddress = http://localhost:5239
+
+GET {{WebAPI_RevendaBebidas_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

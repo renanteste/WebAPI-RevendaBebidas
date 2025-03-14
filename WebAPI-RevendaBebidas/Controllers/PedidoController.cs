@@ -81,9 +81,20 @@ namespace WebAPI_RevendaBebidas.Controllers
 
             var sucesso = await _pedidoService.EnviarPedidoParaAmbev(pedido);
             if (!sucesso)
-                return StatusCode(500, "Falha ao enviar pedido para AMBEV.");
+                return StatusCode(200, "Pedido mínimo de 1.000 unidades. Seu pedido não foi enviado.");
 
             return Ok("Pedido enviado com sucesso.");
         }
+        //Listar pedidos da AMBEV
+        [HttpGet("enviados")]
+        public ActionResult<IEnumerable<PedidoModel>> ObterPedidosEnviados()
+        {
+            var pedidosEnviados = _pedidoService.ObterTodosPedidos()
+                .Where(p => p.EnviadoParaAmbev)
+                .ToList();
+
+            return Ok(pedidosEnviados);
+        }
+
     }
 }

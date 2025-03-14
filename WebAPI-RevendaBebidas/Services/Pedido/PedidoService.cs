@@ -76,8 +76,14 @@ namespace WebAPI_RevendaBebidas.Services.Pedido
 
             try
             {
-                // Simulação do envio do pedido (substituir por chamada real à API AMBEV)
+                // 🔹 Simulação do envio do pedido (substituir por chamada real à API AMBEV)
                 await Task.Delay(1000); // Simulando latência da requisição
+
+                // 🔹 Marcar pedido como enviado
+                pedido.EnviadoParaAmbev = true;
+                _context.Pedidos.Update(pedido);
+                _context.SaveChanges();
+
                 return true;
             }
             catch
@@ -85,6 +91,7 @@ namespace WebAPI_RevendaBebidas.Services.Pedido
                 return false;
             }
         }
+
 
         // Reprocessar pedidos falhos
         public async Task<bool> ReprocessarPedidosFalhos()
